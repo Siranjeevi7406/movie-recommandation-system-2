@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_NAME: /data/db.sqlite3
+    volumes:
+      - sqlite_data:/app/data
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+volumes:
+  sqlite_data:
